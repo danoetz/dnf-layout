@@ -1,4 +1,4 @@
-# dnf_layout
+# Flutter App
 
 A new Flutter application.
 
