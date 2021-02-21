@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dnf_layout/ui/home/components/widgets.dart';
 import 'package:dnf_layout/shared/common/widgets/widgets.dart';
 import 'package:dnf_layout/shared/common/styles/styles.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,8 +10,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
   int _stepJumlah = 0;
   int _stepDurasi = 0;
+
+  List<String> jumlah = [
+    '500K',
+    '1M',
+    '1.5M',
+    '2M',
+    '2.5M',
+    '5M',
+    '10M',
+  ];
+
+  List<String> durasi = [
+    '3',
+    '4',
+    '5',
+    '6',
+  ];
 
   @override
   void initState() {
@@ -24,9 +43,31 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  void showingSnackBar(String message) {
+    homeScaffoldKey.currentState.showSnackBar(
+      new SnackBar(
+        content: new Text(message),
+        backgroundColor: MyColors.deeperBlue,
+        duration: Duration(milliseconds: 500),
+      ),
+    );
+  }
+
+  void showingToast(String message) {
+    Fluttertoast.cancel();
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: MyColors.darkGreyTransparent,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: homeScaffoldKey,
       backgroundColor: MyTheme.lightTheme.primaryColor,
       body: SafeArea(
         child: Container(
@@ -70,22 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 wholeMargin: EdgeInsets.symmetric(horizontal: 10.0),
                 maxLimitPosition: 4,
                 voidCallback: () {
-                  print("Change step");
+                  showingToast("Jumlah pinjaman Rp. ${jumlah[_stepJumlah]}");
                 },
                 onPositionChanged: (value) {
                   setState(() {
                     _stepJumlah = value;
                   });
                 },
-                values: [
-                  '500K',
-                  '1M',
-                  '1.5M',
-                  '2M',
-                  '2.5M',
-                  '5M',
-                  '10M',
-                ],
+                values: jumlah,
                 currentPosition: _stepJumlah,
               ),
               SimpleText(
@@ -99,29 +132,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 wholeMargin: EdgeInsets.symmetric(horizontal: 10.0),
                 maxLimitPosition: 4,
                 voidCallback: () {
-                  print("Change step");
+                  showingToast(
+                      "Durasi peminjaman: ${durasi[_stepDurasi]} bulan");
                 },
                 onPositionChanged: (value) {
                   setState(() {
                     _stepDurasi = value;
                   });
                 },
-                values: [
-                  '3',
-                  '4',
-                  '5',
-                  '6',
-                ],
+                values: durasi,
                 currentPosition: _stepDurasi,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 10.0, vertical: 20.0),
-                child: Text(
-                  "SUDAH MENJADI PEMINJAM",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    letterSpacing: 1.0,
+                child: GestureDetector(
+                  onTap: () => showingSnackBar("SUDAH MENJADI PEMINJAM"),
+                  child: Text(
+                    "SUDAH MENJADI PEMINJAM",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      letterSpacing: 1.0,
+                    ),
                   ),
                 ),
               ),
@@ -129,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: EdgeInsets.all(10.0),
                 width: double.infinity,
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () => showingSnackBar("DAPATKAN DANA SEKARANG!"),
                   child: Text(
                     "DAPATKAN DANA SEKARANG!",
                     style: TextStyle(
