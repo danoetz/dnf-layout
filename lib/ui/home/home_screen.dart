@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dnf_layout/shared/common/styles/styles.dart';
-import 'package:dnf_layout/ui/home/widgets/home_widgets.dart';
+import 'package:dnf_layout/ui/home/components/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -97,7 +97,7 @@ class ContainerWithCircle extends StatelessWidget {
             child: Card(
               elevation: 4,
               margin: EdgeInsets.zero,
-              child: Container(),
+              child: CardContent(),
             ),
           ),
         ),
