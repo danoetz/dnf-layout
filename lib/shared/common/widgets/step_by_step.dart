@@ -51,15 +51,15 @@ class StepByStep extends StatelessWidget {
 
   double getWidthMoreThen4Nodes(BuildContext context) {
     return ((MediaQuery.of(context).size.width - 20) /
-        values.length *
-        currentPosition) +
+            values.length *
+            currentPosition) +
         50;
   }
 
   double getWidthLessThen4Nodes(BuildContext context) {
     return ((MediaQuery.of(context).size.width - 20) /
-        values.length *
-        currentPosition) +
+            values.length *
+            currentPosition) +
         (currentPosition * 50);
   }
 
