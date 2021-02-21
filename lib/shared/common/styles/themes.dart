@@ -22,7 +22,6 @@ class MyTheme {
             color: Colors.white,
           ),
         ),
-        fontFamily: 'Montserrat',
         buttonTheme: ButtonThemeData(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),

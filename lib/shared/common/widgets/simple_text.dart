@@ -1,6 +1,5 @@
-import 'package:dnf_layout/shared/common/styles/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dnf_layout/shared/common/styles/styles.dart';
 
 class SimpleText extends StatelessWidget {
   final String text;

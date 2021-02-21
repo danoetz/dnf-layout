@@ -1,7 +1,7 @@
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter/material.dart';
 import 'package:dnf_layout/shared/common/styles/styles.dart';
 import 'package:dnf_layout/ui/home/components/card_content_detail.dart';
-import 'package:flutter/material.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 
 class CardContent extends StatelessWidget {
   const CardContent({

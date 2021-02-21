@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dnf_layout/shared/common/styles/styles.dart';
 import 'package:dnf_layout/ui/home/components/widgets.dart';
+import 'package:dnf_layout/shared/common/widgets/widgets.dart';
+import 'package:dnf_layout/shared/common/styles/styles.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,6 +9,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _stepJumlah = 0;
+  int _stepDurasi = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
+                child: SimpleText(
+                  text: "Terdaftar dan diawasi oleh",
+                  color: MyColors.blueGrey,
+                  size: 10,
+                ),
+              ),
+              Container(
                 margin: EdgeInsets.all(10.0),
                 height: 50,
                 child: Row(
@@ -33,20 +58,65 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Expanded(child: ContainerWithCircle()),
-              Text("Jumlah pinjaman Rp"),
-              Container(
-                height: 50,
-                margin: EdgeInsets.all(10.0),
-                color: Colors.teal,
+              SimpleText(
+                text: "Jumlah pinjaman Rp",
+                color: MyColors.blueish,
+                fontWeight: FontWeight.normal,
+                padding: EdgeInsets.only(top: 20.0),
               ),
-              Text("Durasi pinjaman, dalam satuan bulan"),
-              Container(
-                height: 50,
-                margin: EdgeInsets.all(10.0),
-                color: Colors.teal,
+              StepByStep(
+                context: context,
+                backgroundColor: Colors.transparent,
+                wholeMargin: EdgeInsets.symmetric(horizontal: 10.0),
+                maxLimitPosition: 4,
+                voidCallback: () {
+                  print("Change step");
+                },
+                onPositionChanged: (value) {
+                  setState(() {
+                    _stepJumlah = value;
+                  });
+                },
+                values: [
+                  '500K',
+                  '1M',
+                  '1.5M',
+                  '2M',
+                  '2.5M',
+                  '5M',
+                  '10M',
+                ],
+                currentPosition: _stepJumlah,
+              ),
+              SimpleText(
+                text: "Durasi pinjaman, dalam satuan bulan",
+                color: MyColors.blueish,
+                fontWeight: FontWeight.normal,
+                padding: EdgeInsets.only(top: 20.0),
+              ),
+              StepByStep(
+                backgroundColor: Colors.transparent,
+                wholeMargin: EdgeInsets.symmetric(horizontal: 10.0),
+                maxLimitPosition: 4,
+                voidCallback: () {
+                  print("Change step");
+                },
+                onPositionChanged: (value) {
+                  setState(() {
+                    _stepDurasi = value;
+                  });
+                },
+                values: [
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                ],
+                currentPosition: _stepDurasi,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0, vertical: 20.0),
                 child: Text(
                   "SUDAH MENJADI PEMINJAM",
                   style: TextStyle(
